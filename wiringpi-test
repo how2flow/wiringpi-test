@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# Copyright (C) 2022-2023 Steve Jeong <steve@how2flow.net>
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+set -e
+
+PREFIX="/usr/share/wiringpi-test"
+ROOT=${CHECKOUT:-${PREFIX}}
+
+. "${ROOT}"/functions
+
+# pinmap
+# +-----+-----+---------+------+---+----------+---+------+---------+-----+-----+
+# | I/O | wPi |   Name  | Mode | V | Physical | V | Mode |  Name   | wPi | I/O |
+# +-----+-----+---------+------+---+----++----+---+------+---------+-----+-----+
+# |     |     |    3.3V |      |   |  1 || 2  |   |      | 5V      |     |     |
+# | ??? |   8 |    SDA0 |   IN | 1 |  3 || 4  |   |      | 5V      |     |     |
+# | ??? |   9 |    SCL0 |   IN | 1 |  5 || 6  |   |      | 0V      |     |     |
+# | ??? |   7 |      IO |   IN | 1 |  7 || 8  | 0 | IN   | UART.TX | 15  | ??? |
+# |     |     |      0V |      |   |  9 || 10 | 0 | IN   | UART.RX | 16  | ??? |
+# | ??? |   0 |      IO |   IN | 0 | 11 || 12 | 0 | IN   | IO      | 1   | ??? |
+# | ??? |   2 |      IO |   IN | 0 | 13 || 14 |   |      | 0V      |     |     |
+# | ??? |   3 |      IO |   IN | 0 | 15 || 16 | 0 | IN   | IO      | 4   | ??? |
+# |     |     |    3.3V |      |   | 17 || 18 | 0 | IN   | IO      | 5   | ??? |
+# | ??? |  12 | SPI.TXD |   IN | 0 | 19 || 20 |   |      | 0V      |     |     |
+# | ??? |  13 | SPI.RXD |   IN | 0 | 21 || 22 | 0 | IN   | IO      | 6   | ??? |
+# | ??? |  14 | SPI.CLK |   IN | 0 | 23 || 24 | 0 | IN   | SPI.CS0 | 10  | ??? |
+# |     |     |      0V |      |   | 25 || 26 | 0 | IN   | IO      | 11  | ??? |
+# | ??? |  30 |    SDA1 |   IN | 1 | 27 || 28 | 1 | IN   | SCL1    | 31  | ??? |
+# | ??? |  21 |      IO |   IN | 0 | 29 || 30 |   |      | 0V      |     |     |
+# | ??? |  22 |      IO |   IN | 0 | 31 || 32 | 0 | IN   | IO      | 26  | ??? |
+# | ??? |  23 |      IO |   IN | 1 | 33 || 34 |   |      | 0V      |     |     |
+# | ??? |  24 |      IO |   IN | 0 | 35 || 36 | 0 | IN   | IO      | 27  | ??? |
+# |     |  25 |    AIN1 |      |   | 37 || 38 |   |      | 1V8     | 28  |     |
+# |     |     |      0V |      |   | 39 || 40 |   |      | AIN0    | 29  |     |
+# +-----+-----+---------+------+---+----++----+---+------+---------+-----+-----+
+# | I/O | wPi |   Name  | Mode | V | Physical | V | Mode |  Name   | wPi | I/O |
+# +-----+-----+---------+------+---+----------+---+------+---------+-----+-----+
+
+options=$(getopt -o a:gh -l alt:,gpio,help -- "$@")
+eval set -- "${options}"
+
+while true; do
+  case "$1" in
+    *)
+      pinmap
+      ;;
+  esac
+  shift
+done

@@ -1,0 +1,13 @@
+Source: wiringpi-test
+Section: electronics
+Priority: optional
+Maintainer: Steve Jeong <steve@how2flow.net>
+Build-Depends: debhelper (>=10),
+  libc6-dev
+
+Package: wiringpi-test
+Architecture: any
+Depends: ${misc:Depends},
+  libwiringpi2,
+  libwiringpi-dev
+Description: test wiringpi gpio & alt functions.

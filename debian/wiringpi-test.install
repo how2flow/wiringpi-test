@@ -1,0 +1,2 @@
+wiringpi-test usr/sbin
+scripts/* usr/share/wiringpi-test
