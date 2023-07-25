@@ -21,7 +21,7 @@
 int main(int argc, char *argv[])
 {
 	while (1) {
-		system("clear");
+		system("clear && sync");
 		system("gpio readall");
 
 		usleep(100000);

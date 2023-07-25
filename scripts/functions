@@ -14,3 +14,73 @@
 # 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+get_wpi() {
+  local phy_to_wpi=('x' 'x' 'x' 8 'x' 9 'x' 7 15 'x' 16 0 1 2 'x' 3 4 'x' 5 12 'x' 13 6 14 10 'x' 11 30 31 21 'x' 22 26 23 'x' 24 27 'x' 'x' 'x' 'x')
+
+  echo "${phy_to_wpi[$1]}"
+}
+
+setup() {
+  case $1 in
+    gpio)
+      # dependencies
+      if [ ! -x $(command -v gpio) ]; then
+        echo "Install wiringPi(or odroid-wiringpi) before Using It!"
+        exit 1
+      fi
+
+      for phy in {1..40}; do
+        PIN=$(get_wpi ${phy})
+        if [ "${PIN}" == 'x' ]; then
+          continue
+        fi
+
+        # initialize gpio mode
+        gpio mode "${PIN}" "out"
+        if [ $? != 0 ]; then
+          continue
+        fi
+
+        # initialize gpio level
+        gpio write "${PIN}" 0
+        if [ $? != 0 ]; then
+          continue
+        fi
+      done
+      ;;
+  esac
+}
+
+test_gpio() {
+  local pin=1
+
+  setup "gpio"
+
+  for phy in {1..40}; do
+    pin="$(get_wpi "${phy}")"
+
+    if [ "${pin}" == 'x' ]; then
+      continue
+    fi
+
+    gpio write "${pin}" 1
+    sleep .5
+    gpio write "${pin}" 0
+    sleep .5
+  done
+}
+
+usage() {
+  echo "Usage: wiringpi-test [OPTION] "
+  echo ""
+  echo "It is the testing wiringpi-gpio package"
+  echo "If you want to test alt functions, using [-a|--alt]"
+  echo "-a, --alt                         test alt functions"
+  echo "      i2c                         test wiringpi i2c"
+  echo "      spi                         test wiringpi spi"
+  echo ""
+  echo "-g, --gpio (default)              test wiringpi gpio"
+}
+
+

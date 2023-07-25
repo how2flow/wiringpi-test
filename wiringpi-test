@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Copyright (C) 2022-2023 Steve Jeong <steve@how2flow.net>
 # 
@@ -55,9 +55,38 @@ eval set -- "${options}"
 
 while true; do
   case "$1" in
-    *)
+    -a|--alt) shift
+      ALT="$1"
+      case "${ALT}" in
+        i2c) echo "i2c"
+          exit 0
+          ;;
+        spi) echo "spi"
+          exit 0
+          ;;
+        *)
+          echo "Not support \"${ALT}\""
+          ;;
+      esac
+      ;;
+    -g|--gpio)
+      test_gpio &
       pinmap
+      exit 0
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    --)
+      echo "Please select test option."
+      echo ""
+      echo "Usage: wiringpi-test [-h|--help]"
+      echo "Call \`wiringpi-test -h\` or \`wiringpi-test --help\` for more detailed usage."
+      break
       ;;
   esac
   shift
 done
+
+# vim: set ft=sh ts=2 sw=2 sts=2 et
