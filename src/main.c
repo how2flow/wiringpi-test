@@ -18,6 +18,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 #include "wiringpitest.h" 
@@ -40,13 +41,16 @@ int main(int argc, char *argv[])
 	int gpioTh;
 	int param = 100;
 
-	gpioTh = pthread_create(&gpio, NULL, bg_gpio_thread, &param);
-	if (gpioTh < 0) {
-		perror("Failed create gpio thread");
-		exit(0);
+	if(!strcmp(argv[1], "gpio")) {
+		gpioTh = pthread_create(&gpio, NULL, bg_gpio_thread, &param);
+		if (gpioTh < 0) {
+			perror("Failed create gpio thread");
+			exit(0);
+		}
+
+		show_header();
 	}
 
-	show_header();
 
 	return 0;
 }

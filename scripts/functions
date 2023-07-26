@@ -80,7 +80,7 @@ usage() {
   echo "      i2c                         test wiringpi i2c"
   echo "      spi                         test wiringpi spi"
   echo ""
-  echo "-g, --gpio (default)              test wiringpi gpio"
+  echo "-g, --gpio                        test wiringpi gpio"
 }
 
 
