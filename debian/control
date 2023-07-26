@@ -3,7 +3,8 @@ Section: electronics
 Priority: optional
 Maintainer: Steve Jeong <steve@how2flow.net>
 Build-Depends: debhelper (>=10),
-  libc6-dev
+  libc6-dev,
+  pkg-config
 
 Package: wiringpi-test
 Architecture: any

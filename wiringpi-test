@@ -70,8 +70,7 @@ while true; do
       esac
       ;;
     -g|--gpio)
-      test_gpio &
-      pinmap
+      wpitest
       exit 0
       ;;
     -h|--help)

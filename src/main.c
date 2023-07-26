@@ -15,17 +15,38 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
+#include "wiringpitest.h" 
+
+static void *bg_gpio_thread(void *param)
+{
+	int ret;
+
+	ret = store_gpio();
+	if (ret < 0) {
+		printf("Failed using gpio\n");
+	}
+
+	return NULL;
+}
 
 int main(int argc, char *argv[])
 {
-	while (1) {
-		system("clear && sync");
-		system("gpio readall");
+	pthread_t gpio;
+	int gpioTh;
+	int param = 100;
 
-		usleep(100000);
+	gpioTh = pthread_create(&gpio, NULL, bg_gpio_thread, &param);
+	if (gpioTh < 0) {
+		perror("Failed create gpio thread");
+		exit(0);
 	}
+
+	show_header();
 
 	return 0;
 }

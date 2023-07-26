@@ -6,6 +6,7 @@ AC_INIT([wiringpi-test], [3.0], [steve@how2flow.net])
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_HEADERS([config.h])
 AC_SUBST([EXTRA_CFLAGS], "-Wall -Werror")
+AC_SUBST([EXTRA_LIBS], "-lwiringPi -lwiringPiDev -lm -lpthread -lrt -lcrypt")
 
 AM_INIT_AUTOMAKE([foreign])
 
@@ -19,6 +20,7 @@ AC_CONFIG_MACRO_DIRS([m4])
 # Checks for libraries.
 
 # Checks for header files.
+AC_CHECK_HEADERS([pthread.h stdio.h stdlib.h unistd.h wiringPi.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 
