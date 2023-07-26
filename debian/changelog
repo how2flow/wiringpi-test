@@ -1,3 +1,9 @@
+wiringpi-test (1.0.2) stable; urgency=medium
+
+  * fix: build error in launchpad
+
+ -- Steve Jeong <steve@how2flow.net>  Wed, 26 Jul 2023 05:42:36 +0000
+
 wiringpi-test (1.0.1) stable; urgency=medium
 
   * debian: Add postrm script
