@@ -21,56 +21,6 @@ get_wpi() {
   echo "${phy_to_wpi[$1]}"
 }
 
-setup() {
-  case $1 in
-    gpio)
-      # dependencies
-      if [ ! -x $(command -v gpio) ]; then
-        echo "Install wiringPi(or odroid-wiringpi) before Using It!"
-        exit 1
-      fi
-
-      for phy in {1..40}; do
-        PIN=$(get_wpi ${phy})
-        if [ "${PIN}" == 'x' ]; then
-          continue
-        fi
-
-        # initialize gpio mode
-        gpio mode "${PIN}" "out"
-        if [ $? != 0 ]; then
-          continue
-        fi
-
-        # initialize gpio level
-        gpio write "${PIN}" 0
-        if [ $? != 0 ]; then
-          continue
-        fi
-      done
-      ;;
-  esac
-}
-
-test_gpio() {
-  local pin=1
-
-  setup "gpio"
-
-  for phy in {1..40}; do
-    pin="$(get_wpi "${phy}")"
-
-    if [ "${pin}" == 'x' ]; then
-      continue
-    fi
-
-    gpio write "${pin}" 1
-    sleep .5
-    gpio write "${pin}" 0
-    sleep .5
-  done
-}
-
 usage() {
   echo "Usage: wiringpi-test [OPTION] "
   echo ""
@@ -82,5 +32,3 @@ usage() {
   echo ""
   echo "-g, --gpio                        test wiringpi gpio"
 }
-
-
