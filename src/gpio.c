@@ -21,7 +21,7 @@
 
 #include "wiringpitest.h"
 
-int setup = 0;
+static int setup = 0;
 
 /* mapping */
 static int phyToPin[64] = {

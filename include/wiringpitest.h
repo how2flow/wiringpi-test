@@ -19,7 +19,6 @@
 #define __WIRINGPITEST_H__
 
 /* vars */
-int setup;
 
 /* functions */
 int show_header(void);
