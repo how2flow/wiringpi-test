@@ -1,3 +1,9 @@
+wiringpi-test (1.0.1) stable; urgency=medium
+
+  * debian: Add postrm script
+
+ -- Steve Jeong <steve@how2flow.net>  Wed, 26 Jul 2023 04:54:40 +0000
+
 wiringpi-test (1.0.0) stable; urgency=medium
 
   * 1.0.0 alpha version.
