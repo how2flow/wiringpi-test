@@ -41,6 +41,11 @@ int main(int argc, char *argv[])
 	int gpioTh;
 	int param = 100;
 
+	if (argc != 2) {
+		printf("Need param Call \"wiringpi-test --help\"\n");
+		return -1;
+	}
+
 	if(!strcmp(argv[1], "gpio")) {
 		gpioTh = pthread_create(&gpio, NULL, bg_gpio_thread, &param);
 		if (gpioTh < 0) {
@@ -51,6 +56,11 @@ int main(int argc, char *argv[])
 		show_header();
 	}
 
+	if(!strcmp(argv[1], "i2c")) {
+	}
+
+	if(!strcmp(argv[1], "spi")) {
+	}
 
 	return 0;
 }

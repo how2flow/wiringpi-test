@@ -58,10 +58,12 @@ while true; do
     -a|--alt) shift
       ALT="$1"
       case "${ALT}" in
-        i2c) echo "i2c"
+        i2c)
+          wpitest "i2c"
           exit 0
           ;;
-        spi) echo "spi"
+        spi)
+          wpitest "spi"
           exit 0
           ;;
         *)
