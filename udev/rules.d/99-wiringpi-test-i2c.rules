@@ -1,0 +1,4 @@
+# wiringpi-test /dev/i2c-*
+
+SUBSYSTEM=="i2c-dev", ENV{DEVNAME}=="/dev/i2c-0", MODE="0777"
+SUBSYSTEM=="i2c-dev", ENV{DEVNAME}=="/dev/i2c-1", MODE="0777"

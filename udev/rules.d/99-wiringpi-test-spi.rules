@@ -1,0 +1,6 @@
+# wiringpi-test /dev/spidev*
+
+SUBSYSTEM=="spidev", ENV{DEVNAME}=="/dev/spidev0.0", MODE="0777"
+SUBSYSTEM=="spidev", ENV{DEVNAME}=="/dev/spidev0.1", MODE="0777"
+SUBSYSTEM=="spidev", ENV{DEVNAME}=="/dev/spidev1.0", MODE="0777"
+SUBSYSTEM=="spidev", ENV{DEVNAME}=="/dev/spidev1.1", MODE="0777"
