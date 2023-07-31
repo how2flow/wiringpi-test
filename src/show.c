@@ -27,12 +27,12 @@ int show_header(void)
 	int ret;
 
 	while (cnt < 60) {
-		ret = system("clear");
+		ret = system("clear && sync");
 		if (ret < 0) {
 			perror("failed");
 		}
 
-		ret = system("sync && gpio readall");
+		ret = system("gpio readall");
 		if (ret < 0) {
 			perror("failed");
 		}

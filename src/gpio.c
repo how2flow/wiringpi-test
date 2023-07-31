@@ -68,8 +68,7 @@ static int setup_gpio(void)
 		if (getAlt(pin) > 1)
 			continue;
 
-		pinMode(pin, OUTPUT);
-		digitalWrite(pin, LOW);
+		pinMode(pin, INPUT);
 	}
 
 	return 1;
@@ -81,6 +80,26 @@ static void toggle_gpio(int pin)
 		delay(500);
 		digitalWrite(pin, LOW);
 		delay(500);
+}
+
+static void use_gpio(void)
+{
+	int phy;
+	int pin;
+
+	for (phy = 1; phy <= 40; phy++) {
+		pin = phyToPin[phy];
+
+		if (pin == -1)
+			continue;
+
+		if (getAlt(pin) > 1)
+			continue;
+
+		pinMode(pin, OUTPUT);
+		toggle_gpio(pin);
+		pinMode(pin, INPUT);
+	}
 }
 
 int store_gpio(void)
@@ -101,7 +120,7 @@ int store_gpio(void)
 		if (getAlt(pin) > 1)
 			continue;
 
-		toggle_gpio(pin);
+		use_gpio();
 	}
 
 	return 0;
