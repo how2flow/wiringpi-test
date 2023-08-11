@@ -1,3 +1,9 @@
+wiringpi-test (1.0.7) stable; urgency=medium
+
+  * feat: Update help message
+
+ -- Steve Jeong <steve@how2flow.net>  Fri, 11 Aug 2023 04:02:14 +0000
+
 wiringpi-test (1.0.6) stable; urgency=medium
 
   * fix: screen blink
