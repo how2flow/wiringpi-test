@@ -1,3 +1,9 @@
+wiringpi-test (1.0.6) stable; urgency=medium
+
+  * fix: screen blink
+
+ -- Steve Jeong <steve@how2flow.net>  Fri, 11 Aug 2023 03:43:08 +0000
+
 wiringpi-test (1.0.5) stable; urgency=medium
 
   * feat: Support alt functions: i2c & spi 
