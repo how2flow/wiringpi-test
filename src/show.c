@@ -29,7 +29,7 @@ int show_header(void)
 	int ret;
 
 	while (cnt < 60) {
-		ret = system("clear && sync");
+		ret = system("clear");
 		if (ret < 0) {
 			perror("failed");
 		}
@@ -53,7 +53,7 @@ int show_i2cbus(int fd)
 	int data, ret;
 
 	while (cnt < 60) {
-		ret = system("clear && sync");
+		ret = system("clear");
 		if (ret < 0) {
 			perror("failed");
 		}
@@ -75,7 +75,7 @@ int show_spidata(void)
 	int ret;
 
 	while(cnt < 60) {
-		ret = system("clear && sync");
+		ret = system("clear");
 		if (ret < 0) {
 			perror("failed");
 		}
