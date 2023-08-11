@@ -28,4 +28,6 @@ usage() {
   echo "-i, --i2c [BUS (defualt: 0)]      test i2c with wiringpi"
   echo "-s, --spi [CS (defualt: 0)]       test spi with wiringpi"
   echo "-g, --gpio                        test gpio with wiringpi"
+  echo ""
+  echo "gpio-only: Short all 40 pins (excluding voltage and GND) exposed in SBC."
 }

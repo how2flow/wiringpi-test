@@ -14,7 +14,7 @@ It is a package that helps test wiringpi and target board.
 
 gpio
 ```
-Short all 40 pins (excluding voltage and GND) exposed in sbc.
+Short all 40 pins (excluding voltage and GND) exposed in SBC.
 ```
 
 i2c
