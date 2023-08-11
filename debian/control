@@ -10,6 +10,9 @@ Build-Depends: debhelper (>=10),
 Package: wiringpi-test
 Architecture: any
 Depends: ${misc:Depends},
+  bsdmainutils,
+  i2c-tools,
+  spi-tools,
   libwiringpi2,
   libwiringpi-dev
 Description: test wiringpi gpio & alt functions.

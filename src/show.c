@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <wiringPi.h>
+#include <wiringPiI2C.h>
 
 #include "wiringpitest.h" 
 
@@ -33,6 +35,52 @@ int show_header(void)
 		}
 
 		ret = system("gpio readall");
+		if (ret < 0) {
+			perror("failed");
+		}
+
+		cnt += 0.1;
+		printf("time: %.1f\n", cnt);
+		usleep(100000);
+	}
+
+	return 0;
+}
+
+int show_i2cbus(int fd)
+{
+	float cnt = 0;
+	int data, ret;
+
+	while (cnt < 60) {
+		ret = system("clear && sync");
+		if (ret < 0) {
+			perror("failed");
+		}
+
+		data = wiringPiI2CRead(fd);
+		printf("Read: 0x%x\n", data);
+
+		cnt += 0.1;
+		printf("time: %.1f\n", cnt);
+		usleep(100000);
+	}
+
+	return 0;
+}
+
+int show_spidata(void)
+{
+	float cnt = 0;
+	int ret;
+
+	while(cnt < 60) {
+		ret = system("clear && sync");
+		if (ret < 0) {
+			perror("failed");
+		}
+
+		ret = system("spi-pipe -d /dev/spidev* -b 4 -n 40 < /dev/zero | hexdump -C");
 		if (ret < 0) {
 			perror("failed");
 		}

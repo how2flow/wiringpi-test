@@ -50,33 +50,31 @@ ROOT=${CHECKOUT:-${PREFIX}}
 # | I/O | wPi |   Name  | Mode | V | Physical | V | Mode |  Name   | wPi | I/O |
 # +-----+-----+---------+------+---+----------+---+------+---------+-----+-----+
 
-options=$(getopt -o a:gh -l alt:,gpio,help -- "$@")
+options=$(getopt -o ghis -l gpio,help,i2c,spi -- "$@")
 eval set -- "${options}"
 
 while true; do
   case "$1" in
-    -a|--alt) shift
-      ALT="$1"
-      case "${ALT}" in
-        i2c)
-          wpitest "i2c"
-          exit 0
-          ;;
-        spi)
-          wpitest "spi"
-          exit 0
-          ;;
-        *)
-          echo "Not support \"${ALT}\""
-          ;;
-      esac
-      ;;
     -g|--gpio)
       wpitest "gpio"
       exit 0
       ;;
     -h|--help)
       usage
+      exit 0
+      ;;
+    -i|--i2c) shift
+      BUS=${2:-'0'}
+      if [[ -e "/dev/i2c${BUS}" || -e "/dev/i2c-${BUS}" ]]; then
+        wpitest "i2c" "${BUS}"
+      fi
+      exit 0
+      ;;
+    -s|--spi) shift
+      CS=${2:-'0'}
+      if [[ -e "/dev/spidev0.${CS}" || -e "/dev/spidev1.${CS}" ]]; then
+        wpitest "spi" "${CS}"
+      fi
       exit 0
       ;;
     --)

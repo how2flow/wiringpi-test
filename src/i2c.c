@@ -15,30 +15,50 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 
-#ifndef __WIRINGPITEST_H__
-#define __WIRINGPITEST_H__
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <wiringPi.h>
+#include <wiringPiI2C.h>
 
-#define SPI_SPEED 1000000
+#include "wiringpitest.h"
 
-/* struct */
-struct i2c_args {
-	unsigned int addr;
-	char *bus;
-};
+static int setup;
+static int fd;
 
-struct spi_args {
-	int cs;
-	int speed;
-};
+static int setup_i2c(int address, char *bus)
+{
+	char *device = (char *)malloc(sizeof(char) * 11);
 
-/* vars */
+	if (wiringPiSetup() == -1)
+		exit(1);
 
-/* functions */
-int show_header(void);
-int show_i2cbus(int fd);
-int show_spidata(void);
+	snprintf(device, 11, "%s%s", "/dev/i2c-", bus);
+	fd = wiringPiI2CSetupInterface(device, address);
 
-int store_gpio(void);
-int store_i2c(void *args);
-int store_spi(void *args);
-#endif
+	return 1;
+}
+
+int store_i2c(void *args)
+{
+	struct i2c_args *arguments = (struct i2c_args *) args;
+	/* int data; */
+
+	if (!setup) {
+		setup = setup_i2c(arguments->addr, arguments->bus);
+	}
+
+	// TODO
+	// Is there a general test routine?
+	/*
+	srand(time(NULL));
+	data = rand() % 2;
+
+	wiringPiI2CWrite(fd, data);
+	*/
+
+	delay(500);
+
+	return fd;
+}

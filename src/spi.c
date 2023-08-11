@@ -15,30 +15,42 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *******************************************************************************/
 
-#ifndef __WIRINGPITEST_H__
-#define __WIRINGPITEST_H__
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <wiringPi.h>
+#include <wiringPiSPI.h>
 
-#define SPI_SPEED 1000000
+#include "wiringpitest.h"
 
-/* struct */
-struct i2c_args {
-	unsigned int addr;
-	char *bus;
-};
+#define MAX_SIZE (1024*1024)
 
-struct spi_args {
-	int cs;
-	int speed;
-};
+static int setup;
+static int fd;
 
-/* vars */
+static int setup_spi(int cs, int speed)
+{
+	if (wiringPiSetup() == -1)
+		exit(1);
 
-/* functions */
-int show_header(void);
-int show_i2cbus(int fd);
-int show_spidata(void);
+	fd = wiringPiSPISetup(cs, speed);
 
-int store_gpio(void);
-int store_i2c(void *args);
-int store_spi(void *args);
-#endif
+	return 1;
+}
+
+int store_spi(void *args)
+{
+	struct spi_args *arguments = (struct spi_args *) args;
+	unsigned char *data = (unsigned char *)malloc(MAX_SIZE);
+
+	if (!setup) {
+		setup = setup_spi(arguments->cs, arguments->speed);
+	}
+
+	if (wiringPiSPIDataRW(arguments->cs, data, MAX_SIZE) == -1) {
+		perror("Failed read/write spidev");
+		return -1;
+	}
+
+	return fd;
+}

@@ -20,7 +20,7 @@ AC_CONFIG_MACRO_DIRS([m4])
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([pthread.h stdio.h stdlib.h string.h unistd.h wiringPi.h])
+AC_CHECK_HEADERS([pthread.h stdio.h stdlib.h string.h time.h unistd.h wiringPi.h wiringPiI2C.h wiringPiSPI.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 

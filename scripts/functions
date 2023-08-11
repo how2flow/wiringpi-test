@@ -22,13 +22,10 @@ get_wpi() {
 }
 
 usage() {
-  echo "Usage: wiringpi-test [OPTION] "
+  echo "Usage: wiringpi-test [TARGET]"
   echo ""
-  echo "It is the testing wiringpi-gpio package"
-  echo "If you want to test alt functions, using [-a|--alt]"
-  echo "-a, --alt                         test alt functions"
-  echo "      i2c                         test wiringpi i2c"
-  echo "      spi                         test wiringpi spi"
-  echo ""
-  echo "-g, --gpio                        test wiringpi gpio"
+  echo "It is the pin test package with wiringpi"
+  echo "-i, --i2c [BUS (defualt: 0)]      test i2c with wiringpi"
+  echo "-s, --spi [CS (defualt: 0)]       test spi with wiringpi"
+  echo "-g, --gpio                        test gpio with wiringpi"
 }
