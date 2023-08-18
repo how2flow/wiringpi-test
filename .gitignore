@@ -25,3 +25,5 @@ obj/
 .debhelper/
 m4/
 autom4te.cache/
+
+test/test
