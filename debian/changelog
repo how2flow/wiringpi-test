@@ -1,3 +1,9 @@
+wiringpi-test (1.0.9) stable; urgency=medium
+
+  * Update README 
+
+ -- Steve Jeong <steve@how2flow.net>  Fri, 18 Aug 2023 08:04:03 +0000
+
 wiringpi-test (1.0.8) stable; urgency=medium
 
   * feat: Add test for Raspberry pi and wiringPi under development
