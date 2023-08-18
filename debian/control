@@ -2,7 +2,7 @@ Source: wiringpi-test
 Section: electronics
 Priority: optional
 Maintainer: Steve Jeong <steve@how2flow.net>
-Standards-Version: 1.0.6
+Standards-Version: 1.0.8
 Homepage: https://how2flow.net/documents/wiringpi-test
 Build-Depends: debhelper (>=10),
   libc6-dev,
