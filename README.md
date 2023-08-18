@@ -62,6 +62,13 @@ Run
 $ ./test [gpio | i2c | spi]
 ```
 
-### contact
+### Issues
+
+```
+blink screen when print gpio pins
+- It is disappeared when used with ssh.
+```
+
+#### contact
 
 e-mail: steve@how2flow.net
