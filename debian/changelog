@@ -1,3 +1,9 @@
+wiringpi-test (1.0.11) stable; urgency=medium
+
+  * Update README (+ wiringpi-test.png)
+
+ -- Steve Jeong <steve@how2flow.net>  Fri, 08 Sep 2023 06:55:33 +0000
+
 wiringpi-test (1.0.10) stable; urgency=medium
 
   * Update README (+ wiringpi-test.gif)
