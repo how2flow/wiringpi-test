@@ -7,6 +7,9 @@ If you want to test gpio input/output functions,<br>
 Short all 40 pins (excluding voltage and GND) exposed in Target board.<br>
 A pin with a non-gpio function selected as mux is skipped.<br>
 
+![wiringpi-test circuit](wiringpi-test.png)
+
+### Run
 ![wiringpi-test](wiringpi-test.gif)
 
 ### Requirements & Support
